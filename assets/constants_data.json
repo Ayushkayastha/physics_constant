@@ -1,0 +1,156 @@
+{
+  "Speed": [
+    {
+      "name": "Speed of Light",
+      "symbol": "c",
+      "value": "3.00 × 10^8 m/s"
+    },
+    {
+      "name": "Speed of Sound (air, 20°C)",
+      "symbol": "v",
+      "value": "343 m/s"
+    },
+    {
+      "name": "Escape Velocity (Earth)",
+      "symbol": "v_e",
+      "value": "11.2 km/s"
+    },
+    {
+      "name": "Earth Orbital Velocity",
+      "symbol": "v_orbit",
+      "value": "29.78 km/s"
+    }
+  ],
+  "Quantum Mechanics": [
+    {
+      "name": "Planck's Constant",
+      "symbol": "h",
+      "value": "6.626 × 10^-34 Js"
+    },
+    {
+      "name": "Reduced Planck's Constant",
+      "symbol": "ħ",
+      "value": "1.055 × 10^-34 Js"
+    },
+    {
+      "name": "Electron Mass",
+      "symbol": "m_e",
+      "value": "9.109 × 10^-31 kg"
+    },
+    {
+      "name": "Proton Mass",
+      "symbol": "m_p",
+      "value": "1.673 × 10^-27 kg"
+    },
+    {
+      "name": "Fine-Structure Constant",
+      "symbol": "α",
+      "value": "7.297 × 10^-3"
+    }
+  ],
+  "Thermodynamics": [
+    {
+      "name": "Boltzmann Constant",
+      "symbol": "k",
+      "value": "1.38 × 10^-23 J/K"
+    },
+    {
+      "name": "Gas Constant",
+      "symbol": "R",
+      "value": "8.314 J/(mol·K)"
+    },
+    {
+      "name": "Stefan–Boltzmann Constant",
+      "symbol": "σ",
+      "value": "5.67 × 10^-8 W/(m²·K⁴)"
+    },
+    {
+      "name": "Avogadro's Number",
+      "symbol": "N_A",
+      "value": "6.022 × 10^23 mol^-1"
+    }
+  ],
+  "Electromagnetism": [
+    {
+      "name": "Elementary Charge",
+      "symbol": "e",
+      "value": "1.602 × 10^-19 C"
+    },
+    {
+      "name": "Vacuum Permittivity",
+      "symbol": "ε₀",
+      "value": "8.85 × 10^-12 F/m"
+    },
+    {
+      "name": "Vacuum Permeability",
+      "symbol": "μ₀",
+      "value": "4π × 10^-7 N/A²"
+    },
+    {
+      "name": "Coulomb's Constant",
+      "symbol": "k_e",
+      "value": "8.99 × 10^9 N·m²/C²"
+    }
+  ],
+  "Gravitation": [
+    {
+      "name": "Gravitational Constant",
+      "symbol": "G",
+      "value": "6.674 × 10^-11 N·m²/kg²"
+    },
+    {
+      "name": "Acceleration due to Gravity (Earth)",
+      "symbol": "g",
+      "value": "9.81 m/s²"
+    },
+    {
+      "name": "Earth Mass",
+      "symbol": "M_earth",
+      "value": "5.972 × 10^24 kg"
+    },
+    {
+      "name": "Earth Radius",
+      "symbol": "R_earth",
+      "value": "6.371 × 10^6 m"
+    }
+  ],
+  "Nuclear Physics": [
+    {
+      "name": "Neutron Mass",
+      "symbol": "m_n",
+      "value": "1.675 × 10^-27 kg"
+    },
+    {
+      "name": "Nuclear Magneton",
+      "symbol": "μ_N",
+      "value": "5.05 × 10^-27 J/T"
+    },
+    {
+      "name": "Fermi Coupling Constant",
+      "symbol": "G_F",
+      "value": "1.166 × 10^-5 GeV^-2"
+    }
+  ],
+  "Astronomy": [
+    {
+      "name": "Astronomical Unit",
+      "symbol": "AU",
+      "value": "1.496 × 10^11 m"
+    },
+    {
+      "name": "Light Year",
+      "symbol": "ly",
+      "value": "9.461 × 10^15 m"
+    },
+    {
+      "name": "Parsec",
+      "symbol": "pc",
+      "value": "3.086 × 10^16 m"
+    },
+    {
+      "name": "Solar Mass",
+      "symbol": "M_sun",
+      "value": "1.989 × 10^30 kg"
+    }
+  ]
+}
