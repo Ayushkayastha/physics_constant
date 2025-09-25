@@ -1,4 +1,6 @@
+import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart' show rootBundle;
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'pages/physics_constants_page.dart';
 import 'services/hive_service.dart';
@@ -6,11 +8,19 @@ import 'services/hive_service.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await HiveService.init();
-  runApp(const ProviderScope(child: MyApp()));
+
+  // Load your existing JSON
+  final String response = await rootBundle.loadString('assets/constants_data.json');
+  final Map<String, dynamic> constantsData = json.decode(response);
+
+  runApp(ProviderScope(
+    child: MyApp(constantsData: constantsData),
+  ));
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  final Map<String, dynamic> constantsData;
+  const MyApp({super.key, required this.constantsData});
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +35,8 @@ class MyApp extends StatelessWidget {
         ),
         scaffoldBackgroundColor: const Color(0xFF0D1B2A),
       ),
-      home: const PhysicsConstantsPage(),
+      // Pass JSON data to PhysicsConstantsPage
+      home: PhysicsConstantsPage(constantsData: constantsData),
     );
   }
 }
