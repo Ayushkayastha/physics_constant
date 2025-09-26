@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart' show rootBundle;
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'pages/physics_constants_page.dart';
+import 'pages/home_page.dart';
 import 'services/hive_service.dart';
 
 void main() async {
@@ -36,7 +36,7 @@ class MyApp extends StatelessWidget {
         scaffoldBackgroundColor: const Color(0xFF0D1B2A),
       ),
       // Pass JSON data to PhysicsConstantsPage
-      home: PhysicsConstantsPage(constantsData: constantsData),
+      home: HomePagePage(constantsData: constantsData),
     );
   }
 }

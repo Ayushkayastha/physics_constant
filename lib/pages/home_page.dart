@@ -6,15 +6,15 @@ import 'favorites_page.dart';
 import 'search_page.dart';
 import '../models/constant_model.dart';
 
-class PhysicsConstantsPage extends StatefulWidget {
+class HomePagePage extends StatefulWidget {
   final Map<String, dynamic> constantsData;
-  const PhysicsConstantsPage({super.key, required this.constantsData});
+  const HomePagePage({super.key, required this.constantsData});
 
   @override
-  State<PhysicsConstantsPage> createState() => _PhysicsConstantsPageState();
+  State<HomePagePage> createState() => _HomePagePageState();
 }
 
-class _PhysicsConstantsPageState extends State<PhysicsConstantsPage> {
+class _HomePagePageState extends State<HomePagePage> {
   int _selectedIndex = 0;
 
   // Example formulas JSON
@@ -120,11 +120,19 @@ class _PhysicsConstantsPageState extends State<PhysicsConstantsPage> {
         ),
         TextButton(
           onPressed: () {
-            if (title == 'Constants') {
-              _showAllCategories(widget.constantsData, title);
-            } else {
-              _showAllCategories(formulas, title);
-            }
+            final data = title == 'Constants' ? widget.constantsData : formulas;
+
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (_) => ConstantsDetailPage(
+                  category: title, // pass the section title
+                  constants: data.values
+                      .expand((list) => List<Map<String, dynamic>>.from(list))
+                      .toList(), // merge all categories into one list
+                ),
+              ),
+            );
           },
           child: const Text(
             'See All',
@@ -139,8 +147,10 @@ class _PhysicsConstantsPageState extends State<PhysicsConstantsPage> {
   }
 
   Widget _buildCategoryCards(Map<String, dynamic> data) {
+    final categories = data.keys.toList();
+
     return Column(
-      children: data.keys.map((category) {
+      children: categories.take(4).map((category) {
         return Padding(
           padding: const EdgeInsets.only(bottom: 12),
           child: _buildCard(
@@ -164,9 +174,12 @@ class _PhysicsConstantsPageState extends State<PhysicsConstantsPage> {
     );
   }
 
+
   Widget _buildFormulaCards() {
+    final categories = formulas.keys.toList();
+
     return Column(
-      children: formulas.keys.map((category) {
+      children: categories.take(4).map((category) {
         return Padding(
           padding: const EdgeInsets.only(bottom: 12),
           child: _buildCard(
@@ -189,7 +202,6 @@ class _PhysicsConstantsPageState extends State<PhysicsConstantsPage> {
       }).toList(),
     );
   }
-
   Widget _buildCard({
     required IconData icon,
     required String title,
@@ -247,65 +259,4 @@ class _PhysicsConstantsPageState extends State<PhysicsConstantsPage> {
     );
   }
 
-  void _showAllCategories(Map<String, dynamic> data, String title) {
-    showModalBottomSheet(
-      context: context,
-      backgroundColor: const Color(0xFF1B263B),
-      shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
-      ),
-      builder: (context) {
-        return Container(
-          padding: const EdgeInsets.all(16),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                'All $title Categories',
-                style: const TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.white,
-                ),
-              ),
-              const SizedBox(height: 16),
-              Flexible(
-                child: ListView.builder(
-                  shrinkWrap: true,
-                  itemCount: data.keys.length,
-                  itemBuilder: (context, index) {
-                    final category = data.keys.elementAt(index);
-                    return ListTile(
-                      title: Text(
-                        category,
-                        style: const TextStyle(color: Colors.white),
-                      ),
-                      trailing: const Icon(
-                        Icons.arrow_forward_ios,
-                        color: Colors.white54,
-                        size: 16,
-                      ),
-                      onTap: () {
-                        Navigator.pop(context);
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (_) => ConstantsDetailPage(
-                              category: category,
-                              constants: List<Map<String, dynamic>>.from(data[category]),
-                            ),
-                          ),
-                        );
-                      },
-                    );
-                  },
-                ),
-              ),
-            ],
-          ),
-        );
-      },
-    );
-  }
 }
