@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:physics_constants/pages/tool_detail_page.dart';
 import 'constants_detail_page.dart';
 import 'favorites_page.dart';
 import 'search_page.dart';
@@ -30,6 +31,19 @@ class _HomePagePageState extends State<HomePagePage> {
     "E=mc²": [
       {"name": "Mass-Energy Equivalence", "symbol": "E=mc²", "value": "Energy equals mass times speed of light squared"}
     ]
+  };
+
+  // Example tools JSON
+  final Map<String, List<Map<String, dynamic>>> tools = {
+    "Thermal Conductivity": [
+      {"name": "Thermal Conductivity", "symbol": "k", "value": "Calculate heat transfer through materials"}
+    ],
+    "Coefficient of Elasticity": [
+      {"name": "Elastic Modulus", "symbol": "E", "value": "Stress / Strain"}
+    ],
+    "Coefficient of Friction": [
+      {"name": "Friction", "symbol": "μ", "value": "Frictional force / Normal force"}
+    ],
   };
 
   @override
@@ -101,6 +115,13 @@ class _HomePagePageState extends State<HomePagePage> {
           _buildSectionHeader('Formulas'),
           const SizedBox(height: 16),
           _buildFormulaCards(),
+
+          const SizedBox(height: 32),
+
+          // Tools Section
+          _buildSectionHeader('Tools'),
+          const SizedBox(height: 16),
+          _buildToolCards(),
         ],
       ),
     );
@@ -120,16 +141,20 @@ class _HomePagePageState extends State<HomePagePage> {
         ),
         TextButton(
           onPressed: () {
-            final data = title == 'Constants' ? widget.constantsData : formulas;
+            final data = title == 'Constants'
+                ? widget.constantsData
+                : title == 'Formulas'
+                ? formulas
+                : tools;
 
             Navigator.push(
               context,
               MaterialPageRoute(
                 builder: (_) => ConstantsDetailPage(
-                  category: title, // pass the section title
+                  category: title,
                   constants: data.values
                       .expand((list) => List<Map<String, dynamic>>.from(list))
-                      .toList(), // merge all categories into one list
+                      .toList(),
                 ),
               ),
             );
@@ -174,7 +199,6 @@ class _HomePagePageState extends State<HomePagePage> {
     );
   }
 
-
   Widget _buildFormulaCards() {
     final categories = formulas.keys.toList();
 
@@ -202,6 +226,33 @@ class _HomePagePageState extends State<HomePagePage> {
       }).toList(),
     );
   }
+
+  Widget _buildToolCards() {
+    final categories = tools.keys.toList();
+
+    return Column(
+      children: categories.take(4).map((category) {
+        return Padding(
+          padding: const EdgeInsets.only(bottom: 12),
+          child: _buildCard(
+            icon: Icons.build, // Tool icon
+            title: category,
+            color: Colors.orangeAccent,
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (_) => ToolDetailPage(toolName: category),
+                ),
+              );
+            },
+
+          ),
+        );
+      }).toList(),
+    );
+  }
+
   Widget _buildCard({
     required IconData icon,
     required String title,
@@ -258,5 +309,4 @@ class _HomePagePageState extends State<HomePagePage> {
       ),
     );
   }
-
 }
